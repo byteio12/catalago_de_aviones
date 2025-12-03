@@ -1,0 +1,88 @@
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo de Aviones</title>
+  <!-- Vinculación al archivo CSS externo -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="contenedor">
+    <div id="avion" class="label">Avión: ?</div>
+    <div id="aeropuerto-inicial" class="label">Aeropuerto inicial: ?</div>
+    <div id="aeropuerto-cercano" class="label">Aeropuerto cercano: ?</div>
+    <button class="boton" onclick="elegirAvionYAeropuertos()">Elegir Aleatorios</button>
+  </div>
+
+  <script>
+        const aeropuertos_lista = [
+            "USS Gerald R. Ford", "HMS Queen Elizabeth", "McConnell AFB", "Air Base Garry", "RAF Scampton",
+            "Tokyo Intl.", "Perth Intl.", "Larnaca Intl", "Greater Rockford", "Mellor Intl.", "Izolirani Intl.",
+            "Al Najaf", "Lukla Airport", "Paphos Intl.", "Boltic Airfield", "Skopelos Airfield", "Henstridge Airfield",
+            "Saint Barthelemy", "Saba", "Grindavik", "Sauthemptona"
+        ];
+
+        const aeropuertos_grandes = ["Tokyo Intl.", "Perth Intl.", "Larnaca Intl", "Greater Rockford", "Mellor Intl.", "Izolirani Intl."];
+        const aeropuertos_medianos = [...aeropuertos_grandes, "Paphos Intl."];
+        const aeropuertos_pequenos = ["Al Najaf", "Lukla Airport", "Paphos Intl.", "Boltic Airfield", "Skopelos Airfield", "Henstridge Airfield", "Saint Barthelemy", "Saba", "Grindavik", "Sauthemptona"];
+        const aeropuertos_militares = ["McConnell AFB", "Air Base Garry", "RAF Scampton"];
+        const portaaviones = ["USS Gerald R. Ford", "HMS Queen Elizabeth"];
+
+        const aeropuertos_cercanos = {
+            'Greater Rockford': ['Air Base Garry', 'Mellor Intl.', 'Boltic Airfield', 'Road Base'],
+            'Air Base Garry': ['Greater Rockford', 'Mellor Intl.', 'Boltic Airfield', 'Road Base'],
+            'Mellor Intl.': ['Greater Rockford', 'Air Base Garry', 'Boltic Airfield', 'Road Base', 'Sauthemptona'],
+            'Boltic Airfield': ['Greater Rockford', 'Air Base Garry', 'Mellor Intl.', 'Road Base'],
+            'Larnaca Intl': ['McConnell AFB', 'Paphos Intl.', 'Henstridge Airfield', 'Skopelos Airfield'],
+            'McConnell AFB': ['Larnaca Intl', 'Paphos Intl.', 'Henstridge Airfield', 'Skopelos Airfield'],
+            'Paphos Intl.': ['Larnaca Intl', 'McConnell AFB', 'Henstridge Airfield', 'Skopelos Airfield'],
+            'Henstridge Airfield': ['Larnaca Intl', 'McConnell AFB', 'Paphos Intl.', 'Skopelos Airfield'],
+            'Skopelos Airfield': ['Larnaca Intl', 'McConnell AFB', 'Paphos Intl.', 'Henstridge Airfield'],
+            'Perth Intl.': ['Lukla Airport', 'Sea Heaven', 'Saint Barthelemy'],
+            'Lukla Airport': ['Perth Intl.', 'Sea Heaven', 'Saint Barthelemy'],
+            'Saint Barthelemy': ['Perth Intl.', 'Lukla Airport', 'Sea Heaven'],
+            'Sea Heaven': ['Perth Intl.', 'Lukla Airport', 'Saint Barthelemy'],
+            'Tokyo Intl.': ['Saba'],
+            'Saba': ['Tokyo Intl.'],
+            'Grindavik': ['Tavaro Seabase'],
+            'Tavaro Seabase': ['Grindavik'],
+            'Izolirani Intl.': ['Al Najaf', 'RAF Scampton'],
+            'Al Najaf': ['Izolirani Intl.', 'RAF Scampton'],
+            'RAF Scampton': ['Izolirani Intl.', 'Al Najaf'],
+            'Sauthemptona': ['Mellor Intl.']
+        };
+
+        const aviones_lista = [
+            'ATR-72', 'Boeing 727', 'Boeing 737', 'Boeing 747', 'Boeing 757', 'Boeing 767', 'Boeing 777', 'Boeing 787',
+            'Airbus A220', 'Airbus A320', 'Airbus A330', 'Airbus A340', 'Airbus A350', 'Airbus A380', 'Concorde',
+            'Bombardier CRJ700', 'Bombardier Q400', 'McDonnell Douglas MD-11', 'McDonnell Douglas MD-90', 'Embraer 170',
+            'Bell 412', 'UH-60 Black Hawk', 'Airbus H135', 'KC-767', 'A330 MRTT', 'Antonov An-22', 'Airbus Beluga',
+            'Boeing DreamLifter', 'Antonov AN-225', 'Cessna Caravan', 'DHC-6 Twin Otter', 'Bombardier Learjet',
+            'Extra 300s', 'Piper PA-28', 'Piper Cub', 'Cessna 172', 'Cessna 182', 'Cessna Caravan Skydiving',
+            'Wright Brothers Plane', 'Cirrus Vision SF50', 'Cessna 402', 'F-14 Tomcat', 'F-15E Strike Eagle',
+            'F-16 Fighting Falcon', 'F/A-18 Super Hornet', 'F-22 Raptor', 'A-10 Warthog', 'B-2 Spirit',
+            'Eurofighter Typhoon', 'Hawk T1', 'Sukhoi Su-27', 'Boeing P-8 Poseidon', 'Sukhoi Su-57', 'EC-18B',
+            'E-3 Sentry', 'SR-71 Blackbird', 'C130 Hercules', 'B-1 Lancer', 'C-17 Globemaster III', 'Avro Vulcan',
+            'B29', 'JAS 39 Gripen', 'English Electric Lightning', 'F-4 Phantom', 'Hawker Harrier', 'MiG-15',
+            'P-38 Lightning', 'KC-1', 'KC-707', 'KC-130J'
+        ];
+
+        const aviones_grandes = [
+            'Boeing 747', 'Boeing 767', 'Boeing 777', 'Boeing 787', 'Airbus A330', 'Airbus A340', 'Airbus A350',
+            'Airbus A380', 'McDonnell Douglas MD-11', 'Antonov An-22', 'Antonov AN-225', 'Airbus Beluga',
+            'Boeing DreamLifter', 'KC-767', 'A330 MRTT', 'B-2 Spirit', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon',
+            'Airbus A320', 'Boeing 737', 'McDonnell Douglas MD-90', 'Concorde', 'C130 Hercules', 'Avro Vulcan',
+            'B29', 'SR-71 Blackbird', 'KC-1', 'KC-707', 'KC-130J'
+        ];
+
+        const aviones_medianos = ['ATR-72', 'Boeing 727', 'Boeing 757', 'Airbus A220', 'Bombardier CRJ700', 'Bombardier Q400', 'Embraer 170'];
+        const aviones_pequenos = ['Extra 300s', 'Piper PA-28', 'Piper Cub', 'Cessna 172', 'Cessna 182', 'Cessna Caravan', 'Cessna Caravan Skydiving', 'Wright Brothers Plane', 'Cirrus Vision SF50', 'Cessna 402', 'Bombardier Learjet', 'DHC-6 Twin Otter'];
+        const aviones_helicopteros = ['Bell 412', 'UH-60 Black Hawk', 'Airbus H135'];
+
+        const aviones_militares = ['B-1 Lancer', 'C-17 Globemaster III', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon', 'Avro Vulcan', 'B29', 'KC-1', 'KC-707', 'KC-130J', 'KC-767', 'C130 Hercules', 'SR-71 Blackbird', 'B-2 Spirit', 'A330 MRTT'];
+
+        const jets_militares = ['A-10 Warthog', '

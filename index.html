@@ -81,4 +81,45 @@
 
         const aviones_militares = ['B-1 Lancer', 'C-17 Globemaster III', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon', 'Avro Vulcan', 'B29', 'KC-1', 'KC-707', 'KC-130J', 'KC-767', 'C130 Hercules', 'SR-71 Blackbird', 'B-2 Spirit', 'A330 MRTT'];
 
-        const jets_militares = ['A-10 Warthog', '
+        const jets_militares = ['A-10 Warthog', 'Eurofighter Typhoon', 'F/A-18 Super Hornet', 'F-14 Tomcat', 'F-15E Strike Eagle', 'F-16 Fighting Falcon', 'F-22 Raptor', 'Hawk T1', 'JAS 39 Gripen', 'Sukhoi Su-27', 'Sukhoi Su-57', 'English Electric Lightning', 'F-4 Phantom', 'Hawker Harrier', 'MiG-15', 'P-38 Lightning'];
+
+            function elegirAvionYAeropuertos() {
+            const avion = aviones_lista[Math.floor(Math.random() * aviones_lista.length)];
+            let aeropuertoInicial = "Desconocido";
+            let aeropuertoCercano = "Desconocido";
+
+            if (aviones_grandes.includes(avion)) {
+                aeropuertoInicial = randomChoice(aeropuertos_grandes);
+                aeropuertoCercano = randomChoice(aeropuertos_grandes.filter(a => a !== aeropuertoInicial));
+            } else if (aviones_militares.includes(avion)) {
+                aeropuertoInicial = randomChoice([...aeropuertos_militares, ...aeropuertos_grandes]);
+                aeropuertoCercano = randomChoice(aeropuertos_lista);
+            } else if (jets_militares.includes(avion)) {
+                aeropuertoInicial = randomChoice([...portaaviones, ...aeropuertos_militares]);
+                let posibles = [];
+                [...portaaviones, ...aeropuertos_militares].forEach(base => {
+                    posibles = posibles.concat(aeropuertos_cercanos[base] || []);
+                });
+                posibles = posibles.filter(a => a !== aeropuertoInicial);
+                aeropuertoCercano = posibles.length ? randomChoice(posibles) : "Ninguno disponible";
+            } else if (aviones_medianos.includes(avion)) {
+                aeropuertoInicial = randomChoice(aeropuertos_medianos);
+                aeropuertoCercano = randomChoice(aeropuertos_medianos.filter(a => a !== aeropuertoInicial));
+            } else if (aviones_pequenos.includes(avion) || aviones_helicopteros.includes(avion)) {
+                aeropuertoInicial = randomChoice(aeropuertos_pequenos);
+                let cercanos = aeropuertos_cercanos[aeropuertoInicial] || [];
+                aeropuertoCercano = cercanos.length ? randomChoice(cercanos) : "Ninguno disponible";
+            }
+
+            document.getElementById("avion").textContent = "Avión: " + avion;
+            document.getElementById("aeropuerto-inicial").textContent = "Aeropuerto inicial: " + aeropuertoInicial;
+            document.getElementById("aeropuerto-cercano").textContent = "Aeropuerto cercano: " + aeropuertoCercano;
+        }
+
+        function randomChoice(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+    </script>
+
+</body>
+</html>

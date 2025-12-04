@@ -11,6 +11,10 @@
     <div id="avion" class="label">Avión: ?</div>
     <div id="aeropuerto-inicial" class="label">Aeropuerto inicial: ?</div>
     <div id="aeropuerto-cercano" class="label">Aeropuerto destino: ?</div>
+
+    <!-- AGREGADO: escala -->
+    <div id="escala" class="label">Escala: (ninguna)</div>
+
     <button class="boton" onclick="elegirAvionYAeropuertos()">Elegir Aleatorios</button>
   </div>
 
@@ -55,7 +59,7 @@
         const aviones_lista = [
             'ATR-72', 'Boeing 727', 'Boeing 737', 'Boeing 747', 'Boeing 757', 'Boeing 767', 'Boeing 777', 'Boeing 787',
             'Airbus A220', 'Airbus A320', 'Airbus A330', 'Airbus A340', 'Airbus A350', 'Airbus A380', 'Concorde',
-            'Bombardier CRJ700', 'Bombardier Q400', 'McDonnell Douglas MD-11', 'McDonnell Douglas MD-90', 'Embraer 170',
+            'Bombardier CRJ700', 'Bombardier Q400', 'McDonnell Douglas MD-11', 'McDonnell Douglas MD-11 Cargo', 'McDonnell Douglas MD-90', 'Embrear 190',
             'Bell 412', 'UH-60 Black Hawk', 'Airbus H135', 'KC-767', 'A330 MRTT', 'Antonov An-22', 'Airbus Beluga',
             'Boeing DreamLifter', 'Antonov AN-225', 'Cessna Caravan', 'DHC-6 Twin Otter', 'Bombardier Learjet',
             'Extra 300s', 'Piper PA-28', 'Piper Cub', 'Cessna 172', 'Cessna 182', 'Cessna Caravan Skydiving',
@@ -64,7 +68,7 @@
             'Eurofighter Typhoon', 'Hawk T1', 'Sukhoi Su-27', 'Boeing P-8 Poseidon', 'Sukhoi Su-57', 'EC-18B',
             'E-3 Sentry', 'SR-71 Blackbird', 'C130 Hercules', 'B-1 Lancer', 'C-17 Globemaster III', 'Avro Vulcan',
             'B29', 'JAS 39 Gripen', 'English Electric Lightning', 'F-4 Phantom', 'Hawker Harrier', 'MiG-15',
-            'P-38 Lightning', 'KC-1', 'KC-707', 'KC-130J'
+            'P-38 Lightning', 'KC-1', 'KC-707', 'KC-130J', 'DC-10', 'DC-10F', 'KC-10', 'Lockhead Tristar'
         ];
 
         const aviones_grandes = [
@@ -72,21 +76,22 @@
             'Airbus A380', 'McDonnell Douglas MD-11', 'Antonov An-22', 'Antonov AN-225', 'Airbus Beluga',
             'Boeing DreamLifter', 'KC-767', 'A330 MRTT', 'B-2 Spirit', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon',
             'Airbus A320', 'Boeing 737', 'McDonnell Douglas MD-90', 'Concorde', 'C130 Hercules', 'Avro Vulcan',
-            'B29', 'SR-71 Blackbird', 'KC-1', 'KC-707', 'KC-130J'
+            'B29', 'SR-71 Blackbird', 'KC-1', 'KC-707', 'KC-130J'. 'DC-10', 'DC-10F', 'KC-10', 'Lockhead Tristar'
         ];
 
-        const aviones_medianos = ['ATR-72', 'Boeing 727', 'Boeing 757', 'Airbus A220', 'Bombardier CRJ700', 'Bombardier Q400', 'Embraer 170'];
+        const aviones_medianos = ['ATR-72', 'Boeing 727', 'Boeing 757', 'Airbus A220', 'Bombardier CRJ700', 'Bombardier Q400', 'Embrear 170'];
         const aviones_pequenos = ['Extra 300s', 'Piper PA-28', 'Piper Cub', 'Cessna 172', 'Cessna 182', 'Cessna Caravan', 'Cessna Caravan Skydiving', 'Wright Brothers Plane', 'Cirrus Vision SF50', 'Cessna 402', 'Bombardier Learjet', 'DHC-6 Twin Otter'];
         const aviones_helicopteros = ['Bell 412', 'UH-60 Black Hawk', 'Airbus H135'];
 
-        const aviones_militares = ['B-1 Lancer', 'C-17 Globemaster III', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon', 'Avro Vulcan', 'B29', 'KC-1', 'KC-707', 'KC-130J', 'KC-767', 'C130 Hercules', 'SR-71 Blackbird', 'B-2 Spirit', 'A330 MRTT'];
+        const aviones_militares = ['B-1 Lancer', 'C-17 Globemaster III', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon', 'Avro Vulcan', 'B29', 'KC-1', 'KC-707', 'KC-130J', 'KC-767', 'C130 Hercules', 'SR-71 Blackbird', 'B-2 Spirit', 'A330 MRTT', 'KC-10'];
 
         const jets_militares = ['A-10 Warthog', 'Eurofighter Typhoon', 'F/A-18 Super Hornet', 'F-14 Tomcat', 'F-15E Strike Eagle', 'F-16 Fighting Falcon', 'F-22 Raptor', 'Hawk T1', 'JAS 39 Gripen', 'Sukhoi Su-27', 'Sukhoi Su-57', 'English Electric Lightning', 'F-4 Phantom', 'Hawker Harrier', 'MiG-15', 'P-38 Lightning'];
 
-            function elegirAvionYAeropuertos() {
+        function elegirAvionYAeropuertos() {
             const avion = aviones_lista[Math.floor(Math.random() * aviones_lista.length)];
             let aeropuertoInicial = "Desconocido";
             let aeropuertoCercano = "Desconocido";
+            let escala = null; // <-- agregado
 
             if (aviones_grandes.includes(avion)) {
                 aeropuertoInicial = randomChoice(aeropuertos_grandes);
@@ -111,9 +116,31 @@
                 aeropuertoCercano = cercanos.length ? randomChoice(cercanos) : "Ninguno disponible";
             }
 
+            // ---------------------------------------------------
+            //     AGREGADO: 50% PROBABILIDAD DE ESCALA
+            // ---------------------------------------------------
+            if (aviones_grandes.includes(avion) || aviones_militares.includes(avion)) {
+                if (Math.random() < 0.5) { // 50/50
+                    let listaCompatible = [];
+
+                    if (aviones_grandes.includes(avion)) {
+                        listaCompatible = [...aeropuertos_grandes];
+                    } else {
+                        listaCompatible = [...aeropuertos_grandes, ...aeropuertos_militares];
+                    }
+
+                    escala = randomChoice(
+                        listaCompatible.filter(a =>
+                            a !== aeropuertoInicial && a !== aeropuertoCercano
+                        )
+                    );
+                }
+            }
+
             document.getElementById("avion").textContent = "Avión: " + avion;
             document.getElementById("aeropuerto-inicial").textContent = "Aeropuerto inicial: " + aeropuertoInicial;
             document.getElementById("aeropuerto-cercano").textContent = "Aeropuerto destino: " + aeropuertoCercano;
+            document.getElementById("escala").textContent = "Escala: " + (escala || "(ninguna)");
         }
 
         function randomChoice(arr) {

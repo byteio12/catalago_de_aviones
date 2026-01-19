@@ -63,12 +63,13 @@
             'Bell 412', 'UH-60 Black Hawk', 'Airbus H135', 'KC-767', 'A330 MRTT', 'Antonov An-22', 'Airbus Beluga',
             'Boeing DreamLifter', 'Antonov AN-225', 'Cessna Caravan', 'DHC-6 Twin Otter', 'Bombardier Learjet',
             'Extra 300s', 'Piper PA-28', 'Piper Cub', 'Cessna 172', 'Cessna 182', 'Cessna Caravan Skydiving',
-            'Wright Brothers Plane', 'Cirrus Vision SF50', 'Cessna 402', 'F-14 Tomcat', 'F-15E Strike Eagle',
-            'F-16 Fighting Falcon', 'F/A-18 Super Hornet', 'F-22 Raptor', 'A-10 Warthog', 'B-2 Spirit',
+            'Wright Brothers Plane', 'Cirrus Vision SF50', 'Cessna 402', 'F-14 Tomcat', 'F-15E Strike Eagle',, 'F/A-18 Super Hornet', 'F-22 Raptor', 'A-10 Warthog', 'B-2 Spirit',
             'Eurofighter Typhoon', 'Hawk T1', 'Sukhoi Su-27', 'Boeing P-8 Poseidon', 'Sukhoi Su-57', 'EC-18B',
             'E-3 Sentry', 'SR-71 Blackbird', 'C130 Hercules', 'B-1 Lancer', 'C-17 Globemaster III', 'Avro Vulcan',
             'B29', 'JAS 39 Gripen', 'English Electric Lightning', 'F-4 Phantom', 'Hawker Harrier', 'MiG-15',
-            'P-38 Lightning', 'KC-1', 'KC-707', 'KC-130J', 'DC-10', 'DC-10F', 'KC-10', 'Lockhead Tristar'
+            'P-38 Lightning', 'KC-1', 'KC-707', 'KC-130J', 'DC-10', 'DC-10F', 'KC-10', 'Lockhead Tristar', 'F-16', 'F-34',
+            'Air Force One 747', 'Air Force One 707', 'C-32', 'C-40 Clipper', 'Marine One helicopter', 'Learjeat 45', 'Lineage 1000',
+            'ACJ350', 'BBJ787', 'Chinook'         
         ];
 
         const aviones_grandes = [
@@ -76,16 +77,17 @@
             'Airbus A380', 'McDonnell Douglas MD-11', 'Antonov An-22', 'Antonov AN-225', 'Airbus Beluga',
             'Boeing DreamLifter', 'KC-767', 'A330 MRTT', 'B-2 Spirit', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon',
             'Airbus A320', 'Boeing 737', 'McDonnell Douglas MD-90', 'Concorde', 'C130 Hercules', 'Avro Vulcan',
-            'B29', 'SR-71 Blackbird', 'KC-1', 'KC-707', 'KC-130J', 'DC-10', 'DC-10F', 'KC-10', 'Lockhead Tristar'
+            'B29', 'SR-71 Blackbird', 'KC-1', 'KC-707', 'KC-130J', 'DC-10', 'DC-10F', 'KC-10', 'Lockhead Tristar',
+            'Air Force One 747', 'Air Force One 707', 'C-32', 'C-40 Clipper', 'ACJ350', 'BBJ787'
         ];
 
-        const aviones_medianos = ['ATR-72', 'Boeing 727', 'Boeing 757', 'Airbus A220', 'Bombardier CRJ700', 'Bombardier Q400', 'Embraer 170'];
+        const aviones_medianos = ['ATR-72', 'Boeing 727', 'Boeing 757', 'Airbus A220', 'Bombardier CRJ700', 'Bombardier Q400', 'Embraer 170', 'Learjet 45', 'Lineage 1000'];
         const aviones_pequenos = ['Extra 300s', 'Piper PA-28', 'Piper Cub', 'Cessna 172', 'Cessna 182', 'Cessna Caravan', 'Cessna Caravan Skydiving', 'Wright Brothers Plane', 'Cirrus Vision SF50', 'Cessna 402', 'Bombardier Learjet', 'DHC-6 Twin Otter'];
-        const aviones_helicopteros = ['Bell 412', 'UH-60 Black Hawk', 'Airbus H135'];
+        const aviones_helicopteros = ['Bell 412', 'UH-60 Black Hawk', 'Airbus H135', 'Chinook'];
 
-        const aviones_militares = ['B-1 Lancer', 'C-17 Globemaster III', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon', 'Avro Vulcan', 'B29', 'KC-1', 'KC-707', 'KC-130J', 'KC-767', 'C130 Hercules', 'SR-71 Blackbird', 'B-2 Spirit', 'A330 MRTT', 'KC-10'];
+        const aviones_militares = ['B-1 Lancer', 'C-17 Globemaster III', 'E-3 Sentry', 'EC-18B', 'Boeing P-8 Poseidon', 'Avro Vulcan', 'B29', 'KC-1', 'KC-707', 'KC-130J', 'KC-767', 'C130 Hercules', 'SR-71 Blackbird', 'B-2 Spirit', 'A330 MRTT', 'KC-10', 'Air Force One 747', 'Air Force One 707', 'C-32', 'C-40 Clipper', 'Marine One helicopter'];
 
-        const jets_militares = ['A-10 Warthog', 'Eurofighter Typhoon', 'F/A-18 Super Hornet', 'F-14 Tomcat', 'F-15E Strike Eagle', 'F-16 Fighting Falcon', 'F-22 Raptor', 'Hawk T1', 'JAS 39 Gripen', 'Sukhoi Su-27', 'Sukhoi Su-57', 'English Electric Lightning', 'F-4 Phantom', 'Hawker Harrier', 'MiG-15', 'P-38 Lightning'];
+        const jets_militares = ['A-10 Warthog', 'Eurofighter Typhoon', 'F/A-18 Super Hornet', 'F-14 Tomcat', 'F-15E Strike Eagle', 'F-16', 'F-22 Raptor', 'Hawk T1', 'JAS 39 Gripen', 'Sukhoi Su-27', 'Sukhoi Su-57', 'English Electric Lightning', 'F-4 Phantom', 'Hawker Harrier', 'MiG-15', 'P-38 Lightning', 'F-34'];
 
         function elegirAvionYAeropuertos() {
             const avion = aviones_lista[Math.floor(Math.random() * aviones_lista.length)];
